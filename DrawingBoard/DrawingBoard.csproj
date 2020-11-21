@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Board.cs" />
+    <Compile Include="Converters\CommonConverter.cs" />
+    <Compile Include="Converters\Visibility2Bool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

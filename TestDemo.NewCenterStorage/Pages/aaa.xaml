@@ -22,15 +22,16 @@
             Background="C:\Users\hbb\Desktop\平面图.png"
             BackgroundGridOffsetX="-5"
             BackgroundGridOffsetY="-5"
-            BackgroundGridSideLen="10">
+            BackgroundGridSideLen="5">
+            <!--  图层1  -->
             <Canvas Name="layer1">
                 <TextBlock
                     Background="Pink"
                     MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
                     Text="layer1" />
             </Canvas>
-            <Canvas>
-
+            <!--  图层2  -->
+            <Canvas Name="layer2">
                 <TextBlock
                     Margin="50"
                     Background="Pink"
