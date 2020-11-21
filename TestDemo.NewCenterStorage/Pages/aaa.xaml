@@ -1,0 +1,41 @@
+﻿<UserControl
+    x:Class="TestDemo.NewCenterStorage.Pages.aaa"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:db="clr-namespace:DrawingBoard.Controls;assembly=DrawingBoard"
+    xmlns:local="clr-namespace:TestDemo.NewCenterStorage.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Tag="图层控件"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DrawingBoard;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <db:Board
+            Background="C:\Users\hbb\Desktop\平面图.png"
+            BackgroundGridOffsetX="-5"
+            BackgroundGridOffsetY="-5"
+            BackgroundGridSideLen="10">
+            <Canvas Name="layer1">
+                <TextBlock
+                    Background="Pink"
+                    MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
+                    Text="layer1" />
+            </Canvas>
+            <Canvas>
+
+                <TextBlock
+                    Margin="50"
+                    Background="Pink"
+                    Text="layer2" />
+            </Canvas>
+        </db:Board>
+    </Grid>
+</UserControl>
