@@ -10,31 +10,30 @@
     d:DesignWidth="800"
     Tag="图层控件"
     mc:Ignorable="d">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/DrawingBoard;component/Themes/Generic.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
         <db:Board
             Background="C:\Users\hbb\Desktop\平面图.png"
-            BackgroundGridOffsetX="-5"
-            BackgroundGridOffsetY="-5"
+            BackgroundGridOffsetX="0"
+            BackgroundGridOffsetY="0"
             BackgroundGridSideLen="10">
-            <Canvas Name="layer1">
-                <TextBlock
-                    Background="Pink"
-                    MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
-                    Text="layer1" />
-            </Canvas>
-            <Canvas>
 
-                <TextBlock
-                    Margin="50"
-                    Background="Pink"
-                    Text="layer2" />
+            <Canvas Name="layer1" AllowDrop="True">
+                <db:LayerElement
+                    EnableDrag="True"
+                    Left="20"
+                    Top="20">
+                    <TextBlock Background="Pink" Text="layer1" />
+                </db:LayerElement>
+            </Canvas>
+
+
+            <Canvas Name="layer2">
+                <db:LayerElement
+                    CenterModel="Center"
+                    Left="60"
+                    Top="60">
+                    <TextBlock Background=" Pink" Text="layer2" />
+                </db:LayerElement>
             </Canvas>
         </db:Board>
     </Grid>

@@ -55,6 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Board.cs" />
+    <Compile Include="Controls\LayerElement.xaml.cs">
+      <DependentUpon>LayerElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\ReciprocalConverter.cs" />
+    <Compile Include="Converters\CommonConverter.cs" />
+    <Compile Include="Converters\Visibility2Bool.cs" />
+    <Compile Include="Enum\ScaleCenterEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -68,6 +75,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Utilities\CommonHelper.cs" />
     <Compile Include="Utilities\Win32Helper.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -79,11 +87,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\LayerElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

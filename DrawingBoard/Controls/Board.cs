@@ -22,97 +22,110 @@ namespace DrawingBoard.Controls
     [TemplatePart(Name = level0ImgName, Type = typeof(Image))]
     [TemplatePart(Name = gridDrawingBrushName, Type = typeof(DrawingBrush))]
     [TemplatePart(Name = GridSquareOffsetName, Type = typeof(TranslateTransform))]
+    [TemplatePart(Name = LayerComboboxName, Type = typeof(ComboBox))]
+    [TemplatePart(Name = BackgroundGridLineBorderName, Type = typeof(Border))]
     [ContentProperty("Layers")]
     public class Board : Control
     {
-        private const string clientAreaName = "clientArea";
-        private Grid clientArea;
 
-        private const string stfName = "stf";
-        private ScaleTransform stf;
-
-        private const string ttfName = "ttf";
-        private TranslateTransform ttf;
-
-        private const string level0ImgName = "level0Img";
-        private Image level0Img;
-
-        private const string gridDrawingBrushName = "gridDrawingBrush";
-        private DrawingBrush gridDrawingBrush;
-
-        private const string GridSquareOffsetName = "GridSquareOffset";
-        private TranslateTransform GridSquareOffset;
-
-
-
+        #region 方法
         static Board()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Board), new FrameworkPropertyMetadata(typeof(Board)));
         }
+        //拖动
+        private void ClientArea_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            hasPopClick = false;
+        }
+        private void clientArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            hasPopClick = true;
 
+            point0 = e.GetPosition(clientArea);
+            ttfx0 = ttf.X;
+            ttfy0 = ttf.Y;
+
+            Console.WriteLine("board 被点击");
+        }
+        private void clientArea_MouseMove(object sender, MouseEventArgs e)
+        {
+            var point_temp = e.GetPosition(clientArea);
+            var point_temp2 = e.GetPosition(level0Img);
+            MouseX = point_temp2.X;
+            MouseY = point_temp2.Y;
+
+            var dx = Math.Abs(point0.X - point_temp.X);
+            var dy = Math.Abs(point0.Y - point_temp.Y);
+            if (e.LeftButton == MouseButtonState.Pressed && (dx > 5 || dy > 5)
+                && (dx < 50) && (dy < 50) && hasPopClick)
+            {
+                DataObject data = new DataObject();
+                data.SetData("from", this.GetHashCode().ToString());
+
+                DragDrop.DoDragDrop(clientArea, data, DragDropEffects.Move);
+            }
+        }
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            BackgroundGridLineBorder = Template.FindName(BackgroundGridLineBorderName, this) as Border;
             clientArea = Template.FindName(clientAreaName, this) as Grid;
             stf = Template.FindName(stfName, this) as ScaleTransform;
             ttf = Template.FindName(ttfName, this) as TranslateTransform;
             level0Img = Template.FindName(level0ImgName, this) as Image;
             level0Img.Source = this.Background;
             gridDrawingBrush = Template.FindName(gridDrawingBrushName, this) as DrawingBrush;
-            gridDrawingBrush.Viewport = new Rect(default(Point), new Point(this.BackgroundGridSideLen, this.BackgroundGridSideLen));
-            GridSquareOffset = Template.FindName(GridSquareOffsetName, this) as TranslateTransform;
-            GridSquareOffset.X = this.BackgroundGridOffsetX;
-            GridSquareOffset.Y = this.BackgroundGridOffsetY;
+            if (gridDrawingBrush != null)
+            {
+                gridDrawingBrush.Viewport = new Rect(default(Point), new Point(this.BackgroundGridSideLen, this.BackgroundGridSideLen));
+                GridSquareOffset = Template.FindName(GridSquareOffsetName, this) as TranslateTransform;
+            }
+            if (GridSquareOffset != null)
+            {
+                GridSquareOffset.X = this.BackgroundGridOffsetX;
+                GridSquareOffset.Y = this.BackgroundGridOffsetY;
+            }
+            LayerCombobox = Template.FindName(LayerComboboxName, this) as ComboBox;
+            if (LayerCombobox != null)
+            {
+                LayerCombobox.SelectedIndex = 0;
+            }
 
+            clientArea.MouseMove -= clientArea_MouseMove;
             clientArea.MouseMove += clientArea_MouseMove;
+            clientArea.PreviewMouseLeftButtonDown -= ClientArea_PreviewMouseLeftButtonDown; ;
+            clientArea.PreviewMouseLeftButtonDown += ClientArea_PreviewMouseLeftButtonDown; ;
+            clientArea.MouseLeftButtonDown -= clientArea_MouseLeftButtonDown;
             clientArea.MouseLeftButtonDown += clientArea_MouseLeftButtonDown;
             clientArea.DragOver += ClientArea_DragOver;
-            //缩放
-
+            clientArea.DragOver += ClientArea_DragOver;
+            clientArea.GiveFeedback -= ClientArea_GiveFeedback;
+            clientArea.GiveFeedback += ClientArea_GiveFeedback;
+            clientArea.PreviewMouseWheel -= Grid_clientArea_PreviewMouseWheel;
             clientArea.PreviewMouseWheel += Grid_clientArea_PreviewMouseWheel;
         }
 
-
-
-        #region 方法
-        //拖动
-        private void clientArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ClientArea_GiveFeedback(object sender, GiveFeedbackEventArgs e)
         {
-            point0 = e.GetPosition(clientArea);
-            ttfx0 = ttf.X;
-            ttfy0 = ttf.Y;
-        }
-
-
-
-        private void clientArea_MouseMove(object sender, MouseEventArgs e)
-        {
-            var point1 = e.GetPosition(clientArea);
-            var dx = Math.Abs(point0.X - point1.X);
-            var dy = Math.Abs(point0.Y - point1.Y);
-            if (e.LeftButton == MouseButtonState.Pressed && (dx > 5 || dy > 5)
-                && (dx < 50) && (dy < 50))
-            {
-                DataObject data = new DataObject();
-                data.SetData("o", point1);
-
-                DragDrop.DoDragDrop(clientArea, data, DragDropEffects.Move);
-            }
+            Mouse.SetCursor(Cursors.SizeAll);
+            e.Handled = true;
         }
 
         private void ClientArea_DragOver(object sender, DragEventArgs e)
         {
-            if (e.Effects.HasFlag(DragDropEffects.Move))
+            var point_temp2 = e.GetPosition(level0Img);
+            MouseX = point_temp2.X;
+            MouseY = point_temp2.Y;
+
+            if (e.Data.GetData("from") is string str && str == this.GetHashCode().ToString())
             {
-                Mouse.SetCursor(Cursors.Hand);
+                var point1 = e.GetPosition(clientArea);
+                ttf.X = ttfx0 + (point1.X - point0.X);
+                ttf.Y = ttfy0 + (point1.Y - point0.Y);
+
+                e.Handled = true;
             }
-
-            //var point1 = Utilities.W32Helper.GetMousePosition();
-            var point1 = e.GetPosition(clientArea);
-
-            ttf.X = ttfx0 + (point1.X - point0.X);
-            ttf.Y = ttfy0 + (point1.Y - point0.Y);
-            e.Handled = true;
         }
         //缩放
         private void Grid_clientArea_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -151,6 +164,29 @@ namespace DrawingBoard.Controls
         #endregion
 
         #region 依赖属性
+
+
+
+        public double MouseX
+        {
+            get { return (double)GetValue(MouseXProperty); }
+            set { SetValue(MouseXProperty, value); }
+        }
+        public static readonly DependencyProperty MouseXProperty =
+            DependencyProperty.Register("MouseX", typeof(double), typeof(Board), new PropertyMetadata(0d));
+
+
+
+        public double MouseY
+        {
+            get { return (double)GetValue(MouseYProperty); }
+            set { SetValue(MouseYProperty, value); }
+        }
+        public static readonly DependencyProperty MouseYProperty =
+            DependencyProperty.Register("MouseY", typeof(double), typeof(Board), new PropertyMetadata(0d));
+
+
+
 
         /// <summary>
         /// 底图
@@ -241,7 +277,27 @@ namespace DrawingBoard.Controls
             set { SetValue(LayersProperty, value); }
         }
         public static readonly DependencyProperty LayersProperty =
-            DependencyProperty.Register("Layers", typeof(ObservableCollection<Canvas>), typeof(Board), new PropertyMetadata(new ObservableCollection<Canvas>()));
+            DependencyProperty.Register("Layers", typeof(ObservableCollection<Canvas>), typeof(Board), new PropertyMetadata(new ObservableCollection<Canvas>(), (a, b) =>
+             {
+                 if (a is Board board && board.LayerCombobox != null)
+                 {
+                     board.LayerCombobox.SelectedIndex = 0;
+                 }
+             }));
+
+
+
+
+
+
+
+        public ScaleTransform stf
+        {
+            get { return (ScaleTransform)GetValue(stfProperty); }
+            set { SetValue(stfProperty, value); }
+        }
+        public static readonly DependencyProperty stfProperty =
+            DependencyProperty.Register("stf", typeof(ScaleTransform), typeof(Board), new PropertyMetadata(null));
 
 
 
@@ -249,9 +305,33 @@ namespace DrawingBoard.Controls
 
         #region 属性字段
 
+        private const string clientAreaName = "clientArea";
+        public Grid clientArea;
+
+        private const string stfName = "stf";
+
+        private const string ttfName = "ttf";
+        public TranslateTransform ttf;
+
+        private const string level0ImgName = "level0Img";
+        private Image level0Img;
+
+        private const string gridDrawingBrushName = "gridDrawingBrush";
+        private DrawingBrush gridDrawingBrush;
+
+        private const string GridSquareOffsetName = "GridSquareOffset";
+        private TranslateTransform GridSquareOffset;
+
+        private const string LayerComboboxName = "LayerCombobox";
+        private ComboBox LayerCombobox;
+
+        private const string BackgroundGridLineBorderName = "gridLine";
+        private Border BackgroundGridLineBorder;
+
         private Point point0;
         private double ttfx0;
         private double ttfy0;
+        private bool hasPopClick;
 
 
         #endregion

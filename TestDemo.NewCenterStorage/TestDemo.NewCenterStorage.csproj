@@ -83,28 +83,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\NewCenterStorage.cs" />
-    <Compile Include="BLL\OldCenterStorage.cs" />
     <Compile Include="Bootstrap.cs" />
     <Compile Include="Helper\W32Helper.cs" />
-    <Compile Include="IBLL\ICenterStorage.cs" />
     <Compile Include="Pages\aaa.xaml.cs">
       <DependentUpon>aaa.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\a_upload.xaml.cs">
-      <DependentUpon>a_upload.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\b_queryUpload.xaml.cs">
-      <DependentUpon>b_queryUpload.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\c_downloadfile_small.xaml.cs">
-      <DependentUpon>c_downloadfile_small.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\d_delete.xaml.cs">
-      <DependentUpon>d_delete.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\e_slicePage.xaml.cs">
-      <DependentUpon>e_slicePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -134,32 +116,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\a_upload.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\b_queryUpload.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\c_downloadfile_small.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\d_delete.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\e_slicePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\iotmp.common\Src\IOTMP.Common.NewCenterStoreClient\IOTMP.Common.NewCenterStoreClient.csproj">
-      <Project>{e486a2f6-3324-43f6-81c1-5131d4c07e48}</Project>
-      <Name>IOTMP.Common.NewCenterStoreClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DrawingBoard\DrawingBoard.csproj">
       <Project>{7a00d9a4-10e8-409b-ac74-1d766c7fe646}</Project>
       <Name>DrawingBoard</Name>

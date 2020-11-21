@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DrawingBoard.Enum
+{
+    public enum ScaleCenterEnum
+    {
+        Center = 0,
+        TopLeft = 1,
+        TopRight =2 ,
+        BottomRight = 3,
+        BottomLeft =4,
+    }
+}

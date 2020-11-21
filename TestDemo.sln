@@ -1,17 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.960
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDemo", "TestDemo\TestDemo.csproj", "{DCC96000-15E9-4E0D-8A52-1725AB223DCD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDemo.NewCenterStorage", "TestDemo.NewCenterStorage\TestDemo.NewCenterStorage.csproj", "{551B503D-774E-44F2-BEF5-4D33FFF827B8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOTMP.Common.NewCenterStoreClient", "..\iotmp.common\Src\IOTMP.Common.NewCenterStoreClient\IOTMP.Common.NewCenterStoreClient.csproj", "{E486A2F6-3324-43F6-81C1-5131D4C07E48}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOTMP.Common.Coding", "..\iotmp.common\Src\IOTMP.Common.Coding\IOTMP.Common.Coding.csproj", "{EEBDAABE-8063-4137-8861-5BE8A3882C75}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOTMP.Common.Lib", "..\iotmp.common\Src\IOTMP.Common.Lib\IOTMP.Common.Lib.csproj", "{4F7E5DDF-36D0-4BA8-8D2B-30BA6A741A56}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingBoard", "DrawingBoard\DrawingBoard.csproj", "{7A00D9A4-10E8-409B-AC74-1D766C7FE646}"
 EndProject
@@ -29,18 +23,6 @@ Global
 		{551B503D-774E-44F2-BEF5-4D33FFF827B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{551B503D-774E-44F2-BEF5-4D33FFF827B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{551B503D-774E-44F2-BEF5-4D33FFF827B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E486A2F6-3324-43F6-81C1-5131D4C07E48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E486A2F6-3324-43F6-81C1-5131D4C07E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E486A2F6-3324-43F6-81C1-5131D4C07E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E486A2F6-3324-43F6-81C1-5131D4C07E48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEBDAABE-8063-4137-8861-5BE8A3882C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEBDAABE-8063-4137-8861-5BE8A3882C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEBDAABE-8063-4137-8861-5BE8A3882C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEBDAABE-8063-4137-8861-5BE8A3882C75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F7E5DDF-36D0-4BA8-8D2B-30BA6A741A56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F7E5DDF-36D0-4BA8-8D2B-30BA6A741A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F7E5DDF-36D0-4BA8-8D2B-30BA6A741A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F7E5DDF-36D0-4BA8-8D2B-30BA6A741A56}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A00D9A4-10E8-409B-AC74-1D766C7FE646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A00D9A4-10E8-409B-AC74-1D766C7FE646}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A00D9A4-10E8-409B-AC74-1D766C7FE646}.Release|Any CPU.ActiveCfg = Release|Any CPU
