@@ -65,6 +65,7 @@ namespace DrawingBoard.Controls
             GridSquareOffset.Y = this.BackgroundGridOffsetY;
 
             clientArea.MouseMove += clientArea_MouseMove;
+            clientArea.PreviewMouseLeftButtonDown += ClientArea_PreviewMouseLeftButtonDown; ;
             clientArea.MouseLeftButtonDown += clientArea_MouseLeftButtonDown;
             clientArea.DragOver += ClientArea_DragOver;
             //缩放
@@ -74,13 +75,22 @@ namespace DrawingBoard.Controls
 
 
 
+
         #region 方法
         //拖动
+        private void ClientArea_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            hasPopClick = false;
+        }
         private void clientArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            hasPopClick = true;
+
             point0 = e.GetPosition(clientArea);
             ttfx0 = ttf.X;
             ttfy0 = ttf.Y;
+
+            Console.WriteLine("board 被点击");
         }
 
 
@@ -91,7 +101,7 @@ namespace DrawingBoard.Controls
             var dx = Math.Abs(point0.X - point1.X);
             var dy = Math.Abs(point0.Y - point1.Y);
             if (e.LeftButton == MouseButtonState.Pressed && (dx > 5 || dy > 5)
-                && (dx < 50) && (dy < 50))
+                && (dx < 50) && (dy < 50) && hasPopClick)
             {
                 DataObject data = new DataObject();
                 data.SetData("o", point1);
@@ -252,6 +262,7 @@ namespace DrawingBoard.Controls
         private Point point0;
         private double ttfx0;
         private double ttfy0;
+        private bool hasPopClick;
 
 
         #endregion

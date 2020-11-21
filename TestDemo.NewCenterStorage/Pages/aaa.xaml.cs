@@ -28,6 +28,8 @@ namespace TestDemo.NewCenterStorage.Pages
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Console.WriteLine(e.GetPosition(layer1));
+            Console.WriteLine("图层元素被点击");
+            e.Handled = true;
 
         }
     }
