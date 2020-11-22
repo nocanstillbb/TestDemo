@@ -268,16 +268,13 @@ namespace DrawingBoard.Controls
 
 
 
-        /// <summary>
-        /// 图层
-        /// </summary>
-        public ObservableCollection<Canvas> Layers
+        public ObservableCollection<FrameworkElement> Layers
         {
-            get { return (ObservableCollection<Canvas>)GetValue(LayersProperty); }
+            get { return (ObservableCollection<FrameworkElement>)GetValue(LayersProperty); }
             set { SetValue(LayersProperty, value); }
         }
         public static readonly DependencyProperty LayersProperty =
-            DependencyProperty.Register("Layers", typeof(ObservableCollection<Canvas>), typeof(Board), new PropertyMetadata(new ObservableCollection<Canvas>(), (a, b) =>
+            DependencyProperty.Register("Layers", typeof(ObservableCollection<FrameworkElement>), typeof(Board), new PropertyMetadata(new ObservableCollection<FrameworkElement>(), (a, b) =>
              {
                  if (a is Board board && board.LayerCombobox != null)
                  {
@@ -314,7 +311,7 @@ namespace DrawingBoard.Controls
         public TranslateTransform ttf;
 
         private const string level0ImgName = "level0Img";
-        private Image level0Img;
+        public Image level0Img;
 
         private const string gridDrawingBrushName = "gridDrawingBrush";
         private DrawingBrush gridDrawingBrush;

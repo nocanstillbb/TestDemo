@@ -17,15 +17,26 @@ using System.Windows.Shapes;
 
 namespace DrawingBoard.Controls
 {
-    /// <summary>
-    /// LayerElement.xaml 的交互逻辑
-    /// </summary>
+    [TemplatePart(Name = stfName, Type = typeof(ScaleTransform))]
     [ContentProperty("Content")]
-    public partial class LayerElement : ContentPresenter
+    public class CanvasItemsControlItem : Control
     {
-        public LayerElement()
+        private const string stfName = "stf";
+        ScaleTransform stf;
+        static CanvasItemsControlItem()
         {
-            InitializeComponent();
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CanvasItemsControlItem), new FrameworkPropertyMetadata(typeof(CanvasItemsControlItem)));
+        }
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            stf = Template.FindName(stfName, this) as ScaleTransform;
+            SetCanvasTopLeft(this);
+        }
+
+        public CanvasItemsControlItem()
+        {
+            DefaultStyleKey = typeof(CanvasItemsControlItem);
             this.SizeChanged += LayerElement_SizeChanged;
             this.Loaded += LayerElement_Loaded;
             this.PreviewMouseLeftButtonDown += LayerElement_PreviewMouseLeftButtonDown;
@@ -39,7 +50,7 @@ namespace DrawingBoard.Controls
             if (haspopMouseClick && e.LeftButton == MouseButtonState.Pressed)
             {
                 DataObject data = new DataObject();
-                data.SetData("from",this.GetHashCode().ToString());
+                data.SetData("from", this.GetHashCode().ToString());
 
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
             }
@@ -47,13 +58,13 @@ namespace DrawingBoard.Controls
 
         private void LayerElement_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.EnableDrag && Parent is Canvas c)
+            if (this.EnableDrag && _board != null)
             {
                 e.Handled = true;
                 haspopMouseClick = true;
                 _top0 = this.Top;
                 _left0 = this.Left;
-                _point0 = e.GetPosition(c);
+                _point0 = e.GetPosition(_board.level0Img);
 
 
             }
@@ -71,20 +82,20 @@ namespace DrawingBoard.Controls
         {
             if (sender is UIElement uc)
             {
-                var boad = uc.GetParent<Board>();
-                if (boad?.clientArea != null)
+                _board = uc.GetParent<Board>();
+                if (_board?.clientArea != null)
                 {
-                    boad.clientArea.DragOver -= Boad_DragOver;
-                    boad.clientArea.DragOver += Boad_DragOver;
+                    _board.clientArea.DragOver -= Boad_DragOver;
+                    _board.clientArea.DragOver += Boad_DragOver;
                 }
             }
         }
 
         private void Boad_DragOver(object sender, DragEventArgs e)
         {
-            if (Parent is Canvas c  && e.Data.GetData("from") is string str && str == this.GetHashCode().ToString())
+            if (_board != null && e.Data.GetData("from") is string str && str == this.GetHashCode().ToString())
             {
-                var point1 = e.GetPosition(c);
+                var point1 = e.GetPosition(_board.level0Img);
                 Console.WriteLine(point1);
                 this.Left = _left0 + point1.X - _point0.X;
                 this.Top = _top0 + point1.Y - _point0.Y;
@@ -132,13 +143,13 @@ namespace DrawingBoard.Controls
             set { SetValue(CenterModelProperty, value); }
         }
         public static readonly DependencyProperty CenterModelProperty =
-            DependencyProperty.Register("CenterModel", typeof(Enum.ScaleCenterEnum), typeof(LayerElement), new PropertyMetadata(Enum.ScaleCenterEnum.Center, (a, b) =>
-             {
-                 if (a is LayerElement layerElement)
-                 {
-                     layerElement.LayerElement_SizeChanged(null, null);
-                 }
-             }));
+            DependencyProperty.Register("CenterModel", typeof(Enum.ScaleCenterEnum), typeof(CanvasItemsControlItem), new PropertyMetadata(Enum.ScaleCenterEnum.Center, (a, b) =>
+            {
+                if (a is CanvasItemsControlItem layerElement)
+                {
+                    layerElement.LayerElement_SizeChanged(null, null);
+                }
+            }));
 
 
 
@@ -148,15 +159,20 @@ namespace DrawingBoard.Controls
             set { SetValue(TopProperty, value); }
         }
         public static readonly DependencyProperty TopProperty =
-            DependencyProperty.Register("Top", typeof(double), typeof(LayerElement), new PropertyMetadata(0d, SetCanvasAP));
+            DependencyProperty.Register("Top", typeof(double), typeof(CanvasItemsControlItem), new PropertyMetadata(0d, SetCanvasAP));
 
         private static void SetCanvasAP(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is LayerElement uc)
+            if (d is CanvasItemsControlItem uc && uc.stf != null)
             {
-                Canvas.SetTop(uc, uc.Top - uc.stf.CenterY);
-                Canvas.SetLeft(uc, uc.Left - uc.stf.CenterX);
+                SetCanvasTopLeft(uc);
             }
+        }
+
+        private static void SetCanvasTopLeft(CanvasItemsControlItem uc)
+        {
+            Canvas.SetTop(uc, uc.Top - uc.stf.CenterY);
+            Canvas.SetLeft(uc, uc.Left - uc.stf.CenterX);
         }
 
         public double Left
@@ -165,7 +181,7 @@ namespace DrawingBoard.Controls
             set { SetValue(LeftProperty, value); }
         }
         public static readonly DependencyProperty LeftProperty =
-            DependencyProperty.Register("Left", typeof(double), typeof(LayerElement), new PropertyMetadata(0d, SetCanvasAP));
+            DependencyProperty.Register("Left", typeof(double), typeof(CanvasItemsControlItem), new PropertyMetadata(0d, SetCanvasAP));
 
 
 
@@ -175,11 +191,11 @@ namespace DrawingBoard.Controls
             set { SetValue(UwbXProperty, value); }
         }
         public static readonly DependencyProperty UwbXProperty =
-            DependencyProperty.Register("UwbX", typeof(double), typeof(LayerElement), new PropertyMetadata(0d, TransformUwbXY));
+            DependencyProperty.Register("UwbX", typeof(double), typeof(CanvasItemsControlItem), new PropertyMetadata(0d, TransformUwbXY));
 
         private static void TransformUwbXY(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is LayerElement uc)
+            if (d is CanvasItemsControlItem uc)
             {
                 uc.Top = uc.UwbY;
                 uc.Left = uc.UwbX;
@@ -192,7 +208,7 @@ namespace DrawingBoard.Controls
             set { SetValue(UwbYProperty, value); }
         }
         public static readonly DependencyProperty UwbYProperty =
-            DependencyProperty.Register("UwbY", typeof(double), typeof(LayerElement), new PropertyMetadata(0d, TransformUwbXY));
+            DependencyProperty.Register("UwbY", typeof(double), typeof(CanvasItemsControlItem), new PropertyMetadata(0d, TransformUwbXY));
 
 
 
@@ -203,15 +219,36 @@ namespace DrawingBoard.Controls
             set { SetValue(EnableDragProperty, value); }
         }
         public static readonly DependencyProperty EnableDragProperty =
-            DependencyProperty.Register("EnableDrag", typeof(bool), typeof(LayerElement), new PropertyMetadata(false));
+            DependencyProperty.Register("EnableDrag", typeof(bool), typeof(CanvasItemsControlItem), new PropertyMetadata(false));
         private bool haspopMouseClick;
         private double _top0;
         private double _left0;
         private Point _point0;
-        private Grid _clientArea;
+        private Board _board;
+
+        public object Content
+        {
+            get { return (object)GetValue(ContentProperty); }
+            set { SetValue(ContentProperty, value); }
+        }
+        public static readonly DependencyProperty ContentProperty =
+            DependencyProperty.Register("Content", typeof(object), typeof(CanvasItemsControlItem), new PropertyMetadata(null));
+
+
+
+        //public DataTemplate Datatemplate
+        //{
+        //    get { return (DataTemplate)GetValue(DatatemplateProperty); }
+        //    set { SetValue(DatatemplateProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for Datatemplate.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty DatatemplateProperty =
+        //    DependencyProperty.Register("Datatemplate", typeof(DataTemplate), typeof(CanvasItemsControlItem), new PropertyMetadata(null));
 
 
 
         #endregion
+
     }
 }

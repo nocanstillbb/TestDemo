@@ -23,7 +23,17 @@ namespace TestDemo.NewCenterStorage.Pages
         public aaa()
         {
             InitializeComponent();
+            TestPointSet = new List<Point>
+            {
+                new Point(10,10),
+                new Point(30,30),
+                new Point(50,50),
+                new Point(70,70),
+                new Point(90,90),
+            };
         }
+
+
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -31,5 +41,19 @@ namespace TestDemo.NewCenterStorage.Pages
             e.Handled = true;
 
         }
+
+        #region 依赖属性
+
+
+        public List<Point> TestPointSet
+        {
+            get { return (List<Point>)GetValue(TestPointSetProperty); }
+            set { SetValue(TestPointSetProperty, value); }
+        }
+        public static readonly DependencyProperty TestPointSetProperty =
+            DependencyProperty.Register("TestPointSet", typeof(List<Point>), typeof(aaa), new PropertyMetadata(null));
+
+
+        #endregion
     }
 }

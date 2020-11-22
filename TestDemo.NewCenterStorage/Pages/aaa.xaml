@@ -12,28 +12,52 @@
     mc:Ignorable="d">
     <Grid>
         <db:Board
+            Name="board"
             Background="C:\Users\hbb\Desktop\平面图.png"
             BackgroundGridOffsetX="0"
             BackgroundGridOffsetY="0"
             BackgroundGridSideLen="10">
 
+            <db:CanvasItemsControl
+                Name="layer0"
+                Background="{x:Null}"
+                ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:aaa}, Path=TestPointSet}">
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="db:CanvasItemsControlItem">
+                        <Setter Property="EnableDrag" Value="True" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <db:CanvasItemsControl.ItemsTemplate>
+                    <DataTemplate>
+                        <Ellipse
+                                        DataContext="{Binding }"
+                                        Width="10"
+                                        Height="10"
+                                        Fill="Pink"
+                                        ToolTip="{Binding X}" />
+                    </DataTemplate>
+
+                </db:CanvasItemsControl.ItemsTemplate>
+            </db:CanvasItemsControl>
+
             <Canvas Name="layer1" AllowDrop="True">
-                <db:LayerElement
+                <db:CanvasItemsControlItem
                     EnableDrag="True"
                     Left="20"
                     Top="20">
                     <TextBlock Background="Pink" Text="layer1" />
-                </db:LayerElement>
+                </db:CanvasItemsControlItem>
             </Canvas>
 
 
             <Canvas Name="layer2">
-                <db:LayerElement
+                <db:CanvasItemsControlItem
                     CenterModel="Center"
+                    EnableDrag="True"
                     Left="60"
                     Top="60">
                     <TextBlock Background=" Pink" Text="layer2" />
-                </db:LayerElement>
+                </db:CanvasItemsControlItem>
             </Canvas>
         </db:Board>
     </Grid>
