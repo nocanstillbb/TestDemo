@@ -15,50 +15,45 @@
             Name="board"
             Background="C:\Users\hbb\Desktop\平面图.png"
             BackgroundGridOffsetX="0"
-            BackgroundGridOffsetY="0"
-            BackgroundGridSideLen="10">
+            BackgroundGridOffsetY="25"
+            BackgroundGridSideLen="50">
 
             <db:CanvasItemsControl
-                Name="layer0"
+                Name="实时轨迹"
                 Background="{x:Null}"
                 ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:aaa}, Path=TestPointSet}">
                 <ItemsControl.ItemContainerStyle>
                     <Style TargetType="db:CanvasItemsControlItem">
-                        <Setter Property="EnableDrag" Value="True" />
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-                <db:CanvasItemsControl.ItemsTemplate>
-                    <DataTemplate>
-                        <Ellipse
-                                        DataContext="{Binding }"
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="db:CanvasItemsControlItem">
+                                    <ContentPresenter
+                                        Content="{TemplateBinding DataContext}"
+                                        ContentTemplate="{TemplateBinding DataTemplate}"
+                                        DataContext="{TemplateBinding DataContext}" />
+                                </ControlTemplate>
+
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="DataTemplate">
+                            <Setter.Value>
+                                <DataTemplate >
+                                    <Ellipse
                                         Width="10"
                                         Height="10"
                                         Fill="Pink"
                                         ToolTip="{Binding X}" />
-                    </DataTemplate>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
 
-                </db:CanvasItemsControl.ItemsTemplate>
+                </ItemsControl.ItemContainerStyle>
             </db:CanvasItemsControl>
 
-            <Canvas Name="layer1" AllowDrop="True">
-                <db:CanvasItemsControlItem
-                    EnableDrag="True"
-                    Left="20"
-                    Top="20">
-                    <TextBlock Background="Pink" Text="layer1" />
-                </db:CanvasItemsControlItem>
-            </Canvas>
 
 
-            <Canvas Name="layer2">
-                <db:CanvasItemsControlItem
-                    CenterModel="Center"
-                    EnableDrag="True"
-                    Left="60"
-                    Top="60">
-                    <TextBlock Background=" Pink" Text="layer2" />
-                </db:CanvasItemsControlItem>
-            </Canvas>
+
         </db:Board>
     </Grid>
 </UserControl>

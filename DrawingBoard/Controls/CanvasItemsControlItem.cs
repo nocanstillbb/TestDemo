@@ -17,21 +17,33 @@ using System.Windows.Shapes;
 
 namespace DrawingBoard.Controls
 {
-    [TemplatePart(Name = stfName, Type = typeof(ScaleTransform))]
     [ContentProperty("Content")]
     public class CanvasItemsControlItem : Control
     {
-        private const string stfName = "stf";
-        ScaleTransform stf;
+        ScaleTransform stf
+        {
+            get
+            {
+                return (this.RenderTransform as TransformGroup)?.Children?.FirstOrDefault() as ScaleTransform;
+            }
+        }
         static CanvasItemsControlItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CanvasItemsControlItem), new FrameworkPropertyMetadata(typeof(CanvasItemsControlItem)));
         }
+
+
+        private void CanvasItemsControlItem_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            stf = Template.FindName(stfName, this) as ScaleTransform;
             SetCanvasTopLeft(this);
+            this.DataContextChanged += CanvasItemsControlItem_DataContextChanged;
+
         }
 
         public CanvasItemsControlItem()
@@ -236,15 +248,17 @@ namespace DrawingBoard.Controls
 
 
 
-        //public DataTemplate Datatemplate
-        //{
-        //    get { return (DataTemplate)GetValue(DatatemplateProperty); }
-        //    set { SetValue(DatatemplateProperty, value); }
-        //}
 
-        //// Using a DependencyProperty as the backing store for Datatemplate.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty DatatemplateProperty =
-        //    DependencyProperty.Register("Datatemplate", typeof(DataTemplate), typeof(CanvasItemsControlItem), new PropertyMetadata(null));
+
+        public DataTemplate DataTemplate
+        {
+            get { return (DataTemplate)GetValue(DataTemplateProperty); }
+            set { SetValue(DataTemplateProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DataTemplate.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DataTemplateProperty =
+            DependencyProperty.Register("DataTemplate", typeof(DataTemplate), typeof(CanvasItemsControlItem), new PropertyMetadata(null));
 
 
 

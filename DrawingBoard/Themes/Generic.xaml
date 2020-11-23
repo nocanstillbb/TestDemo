@@ -130,20 +130,21 @@
             <converters:ReciprocalConverter x:Key="reciprocal" />
         </Style.Resources>
         <Setter Property="EnableDrag" Value="True" />
-        <Setter Property="Left" Value="{Binding X}" />
-        <Setter Property="Top" Value="{Binding Y}" />
+        <Setter Property="Left" Value="{Binding X, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <Setter Property="Top" Value="{Binding Y, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform x:Name="stf" 
+                                    ScaleX="{Binding RelativeSource={RelativeSource AncestorType=local:Board}, Path=stf.ScaleX, Converter={StaticResource reciprocal}}"
+                                    ScaleY="{Binding RelativeSource={RelativeSource AncestorType=local:Board}, Path=stf.ScaleY, Converter={StaticResource reciprocal}}" />
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:CanvasItemsControlItem">
-                    <ContentPresenter
-                        x:Name="ContentPresenter"
-                        Content="{TemplateBinding Content}"
-                        ContentTemplate="{Binding RelativeSource={RelativeSource AncestorType=local:CanvasItemsControl}, Path=ItemsTemplate}">
-                        <ContentPresenter.RenderTransform>
-                            <ScaleTransform x:Name="stf" ScaleX="{Binding RelativeSource={RelativeSource AncestorType=local:Board}, Path=stf.ScaleX, Converter={StaticResource reciprocal}}" ScaleY="{Binding RelativeSource={RelativeSource AncestorType=local:Board}, Path=stf.ScaleY, Converter={StaticResource reciprocal}}" />
-
-                        </ContentPresenter.RenderTransform>
-                    </ContentPresenter>
+                    <ContentPresenter Content="{TemplateBinding Content}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

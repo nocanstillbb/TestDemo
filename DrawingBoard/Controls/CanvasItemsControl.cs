@@ -23,15 +23,17 @@ namespace DrawingBoard.Controls
         {
             DefaultStyleKey = typeof(CanvasItemsControl);
         }
-
+        static object obj = null;
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
+            obj = item;
             return item is CanvasItemsControlItem;
         }
 
         protected override DependencyObject GetContainerForItemOverride()
         {
             var item = new CanvasItemsControlItem();
+            item.DataContext = obj;
             return item;
         }
 
@@ -42,16 +44,10 @@ namespace DrawingBoard.Controls
         }
 
 
-
-        public DataTemplate ItemsTemplate
+        protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
         {
-            get { return (DataTemplate)GetValue(ItemsTemplateProperty); }
-            set { SetValue(ItemsTemplateProperty, value); }
+            base.PrepareContainerForItemOverride(element, item);
         }
-
-        // Using a DependencyProperty as the backing store for ItemsTemplate.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ItemsTemplateProperty =
-            DependencyProperty.Register("ItemsTemplate", typeof(DataTemplate), typeof(CanvasItemsControl), new PropertyMetadata(null));
 
 
     }
