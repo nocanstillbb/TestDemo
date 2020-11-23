@@ -127,9 +127,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DrawingBoard\DrawingBoard.csproj">
+    <ProjectReference Include="..\IOTMP.HMIClient.MapLib\IOTMP.HMIClient.MapLib.csproj">
       <Project>{7a00d9a4-10e8-409b-ac74-1d766c7fe646}</Project>
-      <Name>DrawingBoard</Name>
+      <Name>IOTMP.HMIClient.MapLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestDemo.NewCenterStorage\TestDemo.NewCenterStorage.csproj">
       <Project>{551b503d-774e-44f2-bef5-4d33fff827b8}</Project>

@@ -118,13 +118,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DrawingBoard\DrawingBoard.csproj">
-      <Project>{7a00d9a4-10e8-409b-ac74-1d766c7fe646}</Project>
-      <Name>DrawingBoard</Name>
-    </ProjectReference>
+    <Resource Include="mapimg.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="mapimg.jpg" />
+    <ProjectReference Include="..\IOTMP.HMIClient.MapLib\IOTMP.HMIClient.MapLib.csproj">
+      <Project>{7a00d9a4-10e8-409b-ac74-1d766c7fe646}</Project>
+      <Name>IOTMP.HMIClient.MapLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

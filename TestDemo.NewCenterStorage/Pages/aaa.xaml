@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:db="clr-namespace:DrawingBoard.Controls;assembly=DrawingBoard"
+    xmlns:db="clr-namespace:IOTMP.HMIClient.MapLib.Controls;assembly=IOTMP.HMIClient.MapLib"
     xmlns:local="clr-namespace:TestDemo.NewCenterStorage.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"

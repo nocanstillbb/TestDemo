@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DrawingBoard.Enum
+namespace IOTMP.HMIClient.MapLib.Enum
 {
     public enum ScaleCenterEnum
     {

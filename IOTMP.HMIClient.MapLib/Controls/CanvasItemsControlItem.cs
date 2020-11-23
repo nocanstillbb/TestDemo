@@ -1,4 +1,4 @@
-﻿using DrawingBoard.Utilities;
+﻿using IOTMP.HMIClient.MapLib.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DrawingBoard.Controls
+namespace IOTMP.HMIClient.MapLib.Controls
 {
     [ContentProperty("Content")]
     public class CanvasItemsControlItem : Control

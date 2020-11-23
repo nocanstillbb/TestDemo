@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DrawingBoard.Utilities
+namespace IOTMP.HMIClient.MapLib.Utilities
 {
     public static class W32Helper
     {

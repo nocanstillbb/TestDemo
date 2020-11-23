@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace DrawingBoard.Utilities
+namespace IOTMP.HMIClient.MapLib.Utilities
 {
     public static class CommonHelper
     {

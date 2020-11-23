@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace DrawingBoard.Converters
+namespace IOTMP.HMIClient.MapLib.Converters
 {
     public class Visibility2Bool : IValueConverter
     {

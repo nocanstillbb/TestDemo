@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-namespace DrawingBoard.Controls
+namespace IOTMP.HMIClient.MapLib.Controls
 {
     [TemplatePart(Name = clientAreaName, Type = typeof(Grid))]
     [TemplatePart(Name = stfName, Type = typeof(ScaleTransform))]

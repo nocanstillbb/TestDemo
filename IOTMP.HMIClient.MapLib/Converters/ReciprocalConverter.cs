@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace DrawingBoard.Converters
+namespace IOTMP.HMIClient.MapLib.Converters
 {
     public class ReciprocalConverter : IValueConverter
     {

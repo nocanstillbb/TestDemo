@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DrawingBoard.Controls
+namespace IOTMP.HMIClient.MapLib.Controls
 {
 
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(CanvasItemsControlItem))]

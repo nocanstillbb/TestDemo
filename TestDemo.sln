@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30611.23
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDemo", "TestDemo\TestDemo.csproj", "{DCC96000-15E9-4E0D-8A52-1725AB223DCD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDemo.NewCenterStorage", "TestDemo.NewCenterStorage\TestDemo.NewCenterStorage.csproj", "{551B503D-774E-44F2-BEF5-4D33FFF827B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingBoard", "DrawingBoard\DrawingBoard.csproj", "{7A00D9A4-10E8-409B-AC74-1D766C7FE646}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOTMP.HMIClient.MapLib", "IOTMP.HMIClient.MapLib\IOTMP.HMIClient.MapLib.csproj", "{7A00D9A4-10E8-409B-AC74-1D766C7FE646}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
