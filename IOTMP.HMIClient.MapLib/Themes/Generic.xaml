@@ -138,8 +138,7 @@
                                 Name="btn_draw_Line"
                                 Content="线"
                                 GroupName="drawmodeBtnGroup"
-                                Style="{x:Null}"
-                                Visibility="{TemplateBinding DrawingLineBtnVisibility}" />
+                                Style="{x:Null}" />
                             <RadioButton
                                 Name="btn_draw_Rectangle"
                                 Content="矩形"
@@ -184,7 +183,20 @@
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TransformGroup>
-                    <ScaleTransform x:Name="stf" ScaleX="{Binding RelativeSource={RelativeSource AncestorType=local:Map}, Path=stf.ScaleX, Converter={StaticResource reciprocal}}" ScaleY="{Binding RelativeSource={RelativeSource AncestorType=local:Map}, Path=stf.ScaleY, Converter={StaticResource reciprocal}}" />
+                    <ScaleTransform>
+                        <ScaleTransform.ScaleX>
+                            <converters:ConverterBindableParameter
+                                Binding="{Binding RelativeSource={RelativeSource AncestorType=local:Map}, Path=stf.ScaleX}"
+                                Converter="{StaticResource reciprocal}"
+                                ConverterParameter="{Binding RelativeSource={RelativeSource AncestorType=layer:MapLayerItem}, Path=FixSizeOnScale}" />
+                        </ScaleTransform.ScaleX>
+                        <ScaleTransform.ScaleY>
+                            <converters:ConverterBindableParameter
+                                Binding="{Binding RelativeSource={RelativeSource AncestorType=local:Map}, Path=stf.ScaleY}"
+                                Converter="{StaticResource reciprocal}"
+                                ConverterParameter="{Binding RelativeSource={RelativeSource AncestorType=layer:MapLayerItem}, Path=FixSizeOnScale}" />
+                        </ScaleTransform.ScaleY>
+                    </ScaleTransform>
                 </TransformGroup>
             </Setter.Value>
         </Setter>

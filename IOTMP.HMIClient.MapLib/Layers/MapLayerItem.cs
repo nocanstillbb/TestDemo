@@ -160,6 +160,16 @@ namespace IOTMP.HMIClient.MapLib.Layers
         #region 依赖属性
 
 
+        public bool FixSizeOnScale
+        {
+            get { return (bool)GetValue(FixSizeOnScaleProperty); }
+            set { SetValue(FixSizeOnScaleProperty, value); }
+        }
+        public static readonly DependencyProperty FixSizeOnScaleProperty =
+            DependencyProperty.Register("FixSizeOnScale", typeof(bool), typeof(MapLayerItem), new PropertyMetadata(false));
+
+
+
         public Enum.ScaleCenterEnum CenterModel
         {
             get { return (Enum.ScaleCenterEnum)GetValue(CenterModelProperty); }

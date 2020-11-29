@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Contract\ICoordConverter.cs" />
     <Compile Include="Controls\Map.cs" />
+    <Compile Include="Converters\ConverterBindableParameter.cs" />
     <Compile Include="Layers\Layer.cs" />
     <Compile Include="Layers\MapLayer.cs" />
     <Compile Include="Layers\MapLayerItem.cs" />

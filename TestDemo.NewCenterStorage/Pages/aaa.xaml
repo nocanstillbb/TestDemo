@@ -11,14 +11,19 @@
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
     Tag="图层控件"
     mc:Ignorable="d">
-    <map:Map BackgroundGridSideLen="10">
+    <map:Map Background="C:\Users\hbb\source\repos\TestDemo2\TestDemo.NewCenterStorage\mapimg.jpg" BackgroundGridSideLen="10">
         <map:MapLayer Name="testLayer" ItemsSource="{Binding TestPointSet}">
             <map:MapLayer.ItemContainerStyle>
                 <Style BasedOn="{StaticResource {x:Type map:MapLayerItem}}" TargetType="map:MapLayerItem">
+                    <Setter Property="FixSizeOnScale" Value="True" />
                     <Setter Property="DataTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <TextBlock Background="Pink" Text="{Binding X}" />
+                                <Ellipse
+                                    Width="10"
+                                    Height="10"
+                                    Fill="Pink"
+                                    ToolTip="{Binding X}" />
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>

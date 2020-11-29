@@ -14,12 +14,14 @@ namespace IOTMP.HMIClient.MapLib.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (parameter is bool b && !b)
+                return 1d;
             if (value is double d)
             {
-                return 1 / d;
+                return 1d / d;
 
             }
-            return 1;
+            return 1d;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

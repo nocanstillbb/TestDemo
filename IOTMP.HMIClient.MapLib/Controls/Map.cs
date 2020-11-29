@@ -250,19 +250,6 @@ namespace IOTMP.HMIClient.MapLib.Controls
         #region 依赖属性
 
 
-        /// <summary>
-        /// 定位区域范围不需要画线,所以做一个属性默认显示, 在画区域范围时则手动设置隐藏
-        /// </summary>
-        public Visibility DrawingLineBtnVisibility
-        {
-            get { return (Visibility)GetValue(DrawingLineBtnVisibilityProperty); }
-            set { SetValue(DrawingLineBtnVisibilityProperty, value); }
-        }
-        public static readonly DependencyProperty DrawingLineBtnVisibilityProperty =
-            DependencyProperty.Register("DrawingLineBtnVisibility", typeof(Visibility), typeof(Map), new PropertyMetadata(Visibility.Visible));
-
-
-
         public double MouseX
         {
             get { return (double)GetValue(MouseXProperty); }
@@ -473,14 +460,7 @@ namespace IOTMP.HMIClient.MapLib.Controls
                      }
                      else
                      {
-                         if (m.DrawingLineBtnVisibility == Visibility.Visible)
-                         {
-                             m.btn_draw_Line.IsChecked = true;
-                         }
-                         else
-                         {
-                             m.btn_draw_Rectangle.IsChecked = true;
-                         }
+                         m.btn_draw_Line.IsChecked = true;
                      }
                  }
 
