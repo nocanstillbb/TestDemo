@@ -13,26 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IOTMP.HMIClient.MapLib.Controls
+namespace IOTMP.HMIClient.MapLib.Layers
 {
 
-    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(CanvasItemsControlItem))]
-    public class CanvasItemsControl : ItemsControl
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(MapLayerItem))]
+    public class MapLayer : ItemsControl
     {
-        public CanvasItemsControl()
+        public MapLayer()
         {
-            DefaultStyleKey = typeof(CanvasItemsControl);
+            DefaultStyleKey = typeof(MapLayer);
         }
         static object obj = null;
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
             obj = item;
-            return item is CanvasItemsControlItem;
+            return item is MapLayerItem;
         }
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            var item = new CanvasItemsControlItem();
+            var item = new MapLayerItem();
             item.DataContext = obj;
             return item;
         }

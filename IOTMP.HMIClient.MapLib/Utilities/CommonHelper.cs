@@ -20,5 +20,10 @@ namespace IOTMP.HMIClient.MapLib.Utilities
 
             return dobj as T;
         }
+
+        public static bool IsNaNumber(this double d)
+        {
+            return double.IsNaN(d) || double.IsInfinity(d) || double.IsPositiveInfinity(d) || double.IsNegativeInfinity(d);
+        }
     }
 }

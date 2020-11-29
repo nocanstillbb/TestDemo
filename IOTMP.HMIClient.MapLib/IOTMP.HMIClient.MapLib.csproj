@@ -40,6 +40,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,9 +55,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Board.cs" />
-    <Compile Include="Controls\CanvasItemsControl.cs" />
-    <Compile Include="Controls\CanvasItemsControlItem.cs" />
+    <Compile Include="Contract\ICoordConverter.cs" />
+    <Compile Include="Controls\Map.cs" />
+    <Compile Include="Layers\Layer.cs" />
+    <Compile Include="Layers\MapLayer.cs" />
+    <Compile Include="Layers\MapLayerItem.cs" />
     <Compile Include="Converters\ReciprocalConverter.cs" />
     <Compile Include="Converters\CommonConverter.cs" />
     <Compile Include="Converters\Visibility2Bool.cs" />
@@ -74,6 +77,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ResourceData.cs" />
     <Compile Include="Utilities\CommonHelper.cs" />
     <Compile Include="Utilities\Win32Helper.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -91,8 +95,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

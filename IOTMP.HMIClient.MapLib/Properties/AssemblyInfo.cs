@@ -3,6 +3,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Markup;
 
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
@@ -41,6 +42,11 @@ using System.Windows;
 )]
 
 
+[assembly: XmlnsDefinition("http://IOTMP.HMIClient.MapLib", "IOTMP.HMIClient.MapLib")]
+[assembly: XmlnsDefinition("http://IOTMP.HMIClient.MapLib", "IOTMP.HMIClient.MapLib.Controls")]
+[assembly: XmlnsDefinition("http://IOTMP.HMIClient.MapLib", "IOTMP.HMIClient.MapLib.Layers")]
+[assembly: XmlnsDefinition("http://IOTMP.HMIClient.MapLib", "IOTMP.HMIClient.MapLib.Enum")]
+
 // 程序集的版本信息由下列四个值组成: 
 //
 //      主版本
@@ -53,3 +59,5 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("zh-Hans")]
+
